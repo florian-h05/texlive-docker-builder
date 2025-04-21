@@ -21,6 +21,9 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests wget graphviz openjdk-17-jre-headless
 RUN wget -q -O - https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar > /usr/local/bin/plantuml.jar && \
     chmod +x /usr/local/bin/plantuml.jar
+# Create PlantUML wrapper script
+RUN echo '#!/bin/sh\nexec java -jar /usr/local/bin/plantuml.jar "$@"' > /usr/local/bin/plantuml && \
+    chmod +x /usr/local/bin/plantuml
 
 # Set the working directory
 WORKDIR /workspace
