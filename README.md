@@ -14,3 +14,28 @@ To build locally with make, run:
 ```shell
 docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/florian-h05/texlive-docker-builder:main make
 ```
+
+To build on GitHub actions, you can add a job like the following:
+
+```yaml
+  build-slides:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/florian-h05/texlive-docker-builder
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # make options:
+      #   - build in parallel (-j)
+      #   - don't abort build on errors/ignore errors (-i)
+      - name: Build slides
+        run: make -ij
+    
+      - name: Upload slides
+        uses: actions/upload-artifact@v4
+        with:
+          name: slides
+          path: |
+            SPECIFY PATH(S) HERE
+```
