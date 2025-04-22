@@ -25,9 +25,6 @@ RUN wget -q -O - https://github.com/plantuml/plantuml/releases/download/v${PLANT
 RUN echo '#!/bin/sh\nexec java -jar /usr/local/bin/plantuml.jar "$@"' > /usr/local/bin/plantuml && \
     chmod +x /usr/local/bin/plantuml
 
-# Set the working directory
-WORKDIR /workspace
-
 # Install TeX Live 2024 (use separate steps to utilize layer caching)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests wget perl latexmk xz-utils
