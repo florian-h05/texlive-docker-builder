@@ -12,7 +12,7 @@ This container image has been created for building tutorial slides in computer s
 To build locally with make, run:
 
 ```shell
-docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/florian-h05/texlive-docker-builder:main make
+ docker run --rm -v $(pwd):/workspace -e PUID=$(id -u) -e PGID=$(id -g) ghcr.io/florian-h05/texlive-docker-builder make
 ```
 
 To build on GitHub actions, you can add a job like the following:
