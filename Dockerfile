@@ -41,3 +41,7 @@ ADD additional_texlive_packages.txt /additional_texlive_packages.txt
 RUN tlmgr install $(cat /additional_texlive_packages.txt)
 # Install additional fonts & languages
 RUN tlmgr install wasy babel-german
+
+# Set default working directory
+# Allows to omit the -w option for local builds
+WORKDIR /workspace
